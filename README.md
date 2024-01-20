@@ -1,4 +1,9 @@
 # KarbanBoardProject!
+Nasil Çalıştırırım
+1) appsettings.json dosyasındaki ConnectionStrings alanını kendi veritabanınıza göre düzenleyin
+2) Package Manager Console dan add-migration initial diyerek migration alın
+3) update-database diyerek veritabanını oluşturun
+4) Çalıştırmadan önce Mvc ve KarbanBoard projelerinin aynı anda başlıyacak şekilde ayarlayın
 ![Ekran görüntüsü 2024-01-20 065005](https://github.com/heytbe/KarbanBoardProject/assets/29913353/472e3e9a-c890-4ff9-9341-9bf46451f3a0)
 ![Ekran görüntüsü 2024-01-20 065058](https://github.com/heytbe/KarbanBoardProject/assets/29913353/93987d75-c78c-4d23-b3d5-859e7f6d0699)
 [Ekran görüntüsü 2024-01-20 065612](https://github.com/heytbe/KarbanBoardProject/assets/29913353/3bc546ea-b053-41fd-bfcf-9227af68429b)
