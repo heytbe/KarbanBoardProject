@@ -8,3 +8,4 @@
 ![Ekran görüntüsü 2024-01-20 065341](https://github.com/heytbe/KarbanBoardProject/assets/29913353/3db60697-baa3-4a71-8675-89c921c5c6c0)
 ![Ekran görüntüsü 2024-01-20 065240](https://github.com/heytbe/KarbanBoardProject/assets/29913353/34fee4ae-7138-4ea3-8dfe-11a94c58f6d7)
 ![Ekran görüntüsü 2024-01-20 065143](https://github.com/heytbe/KarbanBoardProject/assets/29913353/18a5a4f7-cbcb-4e3f-b779-7bc245192a91)
+![Ekran görüntüsü 2024-01-20 065612](https://github.com/heytbe/KarbanBoardProject/assets/29913353/a061be86-e5e7-4000-8547-c6c170c86bc3)
