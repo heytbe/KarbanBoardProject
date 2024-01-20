@@ -1,0 +1,104 @@
+﻿@model CardCreateVM
+
+<main class="mainarea" style="background-color: @Context.Request.Query["color"];">
+    <div class="flex-between-start nowrap boxarea">
+        @foreach (var item in Model.get.data)
+        {
+            <div class="area4 box">
+                <div class="flex-between-center tasklisttitle">
+                    <span class="title">@item.ListName</span>
+                    <i class="fa-solid fa-plus createbtn" data-id="@item.Id"></i>
+                </div>
+                <div class="fullscreen boxcontent">
+                    @foreach (var card in item.ListCards)
+                    {
+                        <div class="card" style="background-color: @card.CardColor;">
+                            <span class="title">@card.CardName</span>
+                            <p class="content">
+                                @card.Description
+                            </p>
+                            @foreach (var ticket in card.ListTickets)
+                            {
+                                <span class="ticket">@ticket.Name</span>
+                            }
+                            <div class="setting">
+                                <div class="flex-center-center-row icon" style="height: 100%;">
+                                    <i class="fa-solid fa-eye" onclick="GetBoardList('@card.Id')"></i>
+                                    <i class="fa-solid fa-trash" onclick="Delete(this,'/TaskList/Delete?itemid=@card.Id')"></i>
+                                    <a asp-action="Update" asp-route-itemid="@card.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>>
+            </div>
+        }
+    </div>
+</main>
+
+@section modal{
+    <script src="~/js/DeleteAjax.js"></script>
+    <script src="~/js/ListAjax.js"></script>
+    <div class="content">
+        <form method="post" enctype="multipart/form-data" id="cardCreate" data-id="">
+            <div class="flex-between-start area">
+                <div class="column70">
+                    <section class="flex-start-start-column title">
+                        <div class="flex-start-start-row">
+                            <i class="fa-solid fa-plus"></i>
+                            <span class="cardtitle">Başlık</span>
+                        </div>
+                        <input type="text" asp-for="create.CardName" placeholder="Başlık">
+                    </section>
+                    <section class="fullscreen ticketadd">
+                        <div class="flex-start-start-row title">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span class="tickettitle">Etiketler</span>
+                        </div>
+                        <div class="flex-start-start-row wrap ticketcontent">
+                            <input type="text" class="createticket">
+                            <div class="flex-start-start-row ticketcontentarea">
+                            </div>
+                        </div>
+                    </section>
+                    <section class="fullscreen description">
+                        <div class="flex-start-start-row title">
+                            <i class="fa-solid fa-message"></i>
+                            <span class="cardtitle">Açıklama</span>
+                        </div>
+                        <textarea asp-for="create.Description" id="" cols="30" rows="10" class="editor"></textarea>
+                    </section>
+                    <section class="fullscreen addition">
+                        <div class="flex-start-start-row title">
+                            <i class="fa-solid fa-paperclip"></i>
+                            <span class="cardtitle">Eklentiler</span>
+                        </div>
+                        <div class="flex-start-start-column wrap add"></div>
+                    </section>
+                </div>
+                <div class="column30">
+                    <div class="input">
+                        <label for="add" class="title"><i class="fa-solid fa-paperclip"></i>Eklenti</label>
+                        <input class="none" type="file" id="add" multiple>
+                    </div>
+                    <div class="input">
+                        <span class="title"><i class="fa-solid fa-calendar-days"></i>Tarih</span>
+                        <div class="fullscreen datebox">
+                            <span class="flex-start-start-row start">Başlangıç</span>
+                            <input type="date" asp-for="create.StartDate">
+                            <span class="flex-start-start-row end">Bitiş</span>
+                            <input type="date" asp-for="create.FinisDate">
+                        </div>
+                    </div>
+                    <div class="input">
+                        <span class="title"><i class="fa-solid fa-fill-drip"></i>Renk</span>
+                        <input type="color" asp-for="create.CardColor">
+                    </div>
+                    <div class="input">
+                        <button type="submit">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+}

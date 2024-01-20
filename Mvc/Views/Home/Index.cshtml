@@ -1,0 +1,133 @@
+﻿@model BoardVM
+
+<main class="mainarea">
+    <div class="flex-between-center nowrap mainmenu">
+        <a href="">
+            Heytbe
+        </a>
+        @await Component.InvokeAsync("UserDetail")
+    </div>
+    <div class="maincontent">
+        <span class="maintitle">Panolar</span>
+        <section class="fullscreen board-list">
+            <ul class="flex-start-start-row wrap board-list-list">
+                <li class="area3">
+                    <div class="board-add btnadd">
+                        <span class="title">Yeni Pano Ekle</span>
+                    </div>
+                </li>
+                @foreach (var item in Model.list.data)
+                {
+                    <li class="area3">
+                        <a href="">
+                            <div class="board-add card" style="background-color: @item.BoardColor;">
+                                <span class="title">@item.BoardName</span>
+                                <div class="setting">
+                                    <div class="flex-center-center-row icon" style="height: 100%;">
+                                        <a asp-controller="TaskList" asp-action="Index" asp-route-itemid="@item.Id" asp-route-color="@item.BoardColor"> <i class="fa-solid fa-eye"></i></a>
+                                        <a asp-action="Delete" asp-route-itemid="@item.Id"><i class="fa-solid fa-trash"></i></a>
+                                        <a asp-action="Update" asp-route-itemid="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </section>
+    </div>
+</main>
+
+@section modal{
+    <div class="content">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
+            <div class="flex-between-start area">
+                <div class="column70">
+                    <section class="flex-start-start-column panoadd">
+                        <div class="fullscreen">
+                            <i class="fa-solid fa-plus"></i>
+                            <span class="cardtitle">Pano Adı</span>
+                        </div>
+                        <input type="text" asp-for="create.BoardName" placeholder="Pano Adını Girin">
+                    </section>
+                    <section class="fullscreen ticketadd">
+                        <div class="flex-start-start-row title">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span class="tickettitle">Sabit Listeler</span>
+                        </div>
+                        <div class="flex-start-start-row wrap ticketcontent">
+                            <span>Backlog</span>
+                            <span>To Do</span>
+                            <span>In Progress</span>
+                            <span>Done</span>
+                            <input type="hidden" asp-for="create.BoardListCreate" value="Backlog">
+                            <input type="hidden" asp-for="create.BoardListCreate" value="To Do">
+                            <input type="hidden" asp-for="create.BoardListCreate" value="In Progress">
+                            <input type="hidden" asp-for="create.BoardListCreate" value="Done">
+                        </div>
+                    </section>
+                    <section class="fullscreen">
+                        <div class="input userssearch">
+                            <span class="title"><i class="fa-solid fa-user"></i>Üyeler</span>
+                            <input type="text" class="boardusers">
+                        </div>
+                        <div class="userareas"></div>
+                    </section>
+                </div>
+                <div class="column30">
+                    <div class="input">
+                        <span class="title"><i class="fa-solid fa-fill-drip"></i>Renk</span>
+                        <input type="color" asp-for="create.BoardColor">
+                    </div>
+                    <div class="input userticket"> </div>
+                    <input type="hidden" asp-for="create.UserEmail" value="@User.Identity.Name" />
+                    <div class="input">
+                        <button type="submit">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        let boardusers = document.querySelector(".boardusers"),
+            userareas = document.querySelector(".userareas");
+
+        boardusers.addEventListener("keyup", function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: `/Home/GetOneUser?username=${this.value}`,
+                type: "GET",
+                success: function (data) {
+                    if (data == null || data == undefined || data.length == 0) {
+                        userareas.innerHTML = "";
+                        let html = `<section class="fullscreen users">
+                                       Bulunamadı
+                                    </section>`;
+                        userareas.insertAdjacentHTML("afterbegin", html);
+                        userareas.style.display = "block";
+                    }else{
+                        userareas.innerHTML = "";
+                        let html = `<section class="fullscreen users userscontent">
+                                        <div class="flex-between-start">
+                                           <img src="https://localhost:7206/${data.data.userPhoto}" alt="">
+                                           <span>${data.data.userName}</span>
+                                                   <input type="hidden" name="create.BoardUsersCreate" value="${data.data.email}"
+                                        </div>
+                                    </section>`;
+
+                        userareas.insertAdjacentHTML("afterbegin", html);
+                        userareas.style.display = "block";
+
+                        $(".users").on("click",function(){
+                            $(".userticket").append($(this));
+                            userareas.style.display ="none";
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}

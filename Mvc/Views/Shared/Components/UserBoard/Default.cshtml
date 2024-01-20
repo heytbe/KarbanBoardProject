@@ -1,0 +1,9 @@
+﻿@model Response<BoardListByUser>
+
+    <span class="title">Benimle Paylaşılanlar</span>
+<ul>
+    @foreach(var item in Model.data)
+    {
+        <li><a href="/TaskList?itemid=@item.BoardId&color=@(item.Board.BoardColor.Replace("#", "%23"))">@item.Board.BoardName</a></li>
+    }
+</ul>

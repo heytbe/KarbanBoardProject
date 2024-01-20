@@ -1,0 +1,31 @@
+﻿@model BoardUpdateVM
+
+<main class="mainarea">
+    <div class="taskviewcard" style="display:block;">
+        <div class="content">
+            <form method="post" asp-action="Update" enctype="multipart/form-data">
+                <div class="flex-between-start area">
+                    <div class="column70">
+                        <section class="flex-start-start-column panoadd">
+                            <div class="fullscreen">
+                                <i class="fa-solid fa-plus"></i>
+                                <span class="cardtitle">Pano Adı</span>
+                            </div>
+                            <input type="text" asp-for="update.BoardName" placeholder="Pano Adını Girin" value="@Model.get.data.BoardName">
+                        </section>
+                    </div>
+                    <div class="column30">
+                        <div class="input">
+                            <span class="title"><i class="fa-solid fa-fill-drip"></i>Renk</span>
+                            <input type="color" asp-for="update.BoardColor" value="@Model.get.data.BoardColor">
+                        </div>
+                        <input type="hidden" asp-for="update.Id" value="@Model.get.data.Id" />
+                        <div class="input">
+                            <button type="submit">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

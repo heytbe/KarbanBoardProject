@@ -1,0 +1,668 @@
+{
+	"info": {
+		"_postman_id": "9d670cc9-1c32-4a80-b26c-bf7d9c7d3a1c",
+		"name": "Karban Board",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23970902"
+	},
+	"item": [
+		{
+			"name": "Token Al",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"eposta@eposta.com\",\r\n  \"password\": \"Admin+123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7206/api/Authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Authentication"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Pano Listele",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/Board/board-list?PageSize=10&email=eposta%40eposta.com",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Board",
+						"board-list"
+					],
+					"query": [
+						{
+							"key": "PageSize",
+							"value": "10"
+						},
+						{
+							"key": "email",
+							"value": "eposta%40eposta.com"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Kullanıcı PanoListesi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/BoardUser/user-board-list?email=eposta%40eposta.com",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"BoardUser",
+						"user-board-list"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "eposta%40eposta.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "İd ye göre bir pano liste",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/Board/board-one-list?id=8c9ad167-4235-4504-a3d9-a8e6010993fd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Board",
+						"board-one-list"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8c9ad167-4235-4504-a3d9-a8e6010993fd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Emaile göre pano listele",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/BoardUser/user-board-list?email=eposta%40eposta.com",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"BoardUser",
+						"user-board-list"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "eposta%40eposta.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "İd ye göre panoları ve cardları listele",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/TaskList/list?id=8c9ad167-4235-4504-a3d9-a8e6010993fd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"TaskList",
+						"list"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8c9ad167-4235-4504-a3d9-a8e6010993fd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Card detay listele",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/TaskListCard/cart-list?id=a87d75ed-c0ec-4f0a-9360-0767119c0e1c",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"TaskListCard",
+						"cart-list"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "a87d75ed-c0ec-4f0a-9360-0767119c0e1c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kullanıcı Bilgileri Listele",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/User/get-user?username=heytbe",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"User",
+						"get-user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "heytbe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pano Oluştur",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "boardName",
+							"value": "karban",
+							"type": "text"
+						},
+						{
+							"key": "boardColor",
+							"value": "blue",
+							"type": "text"
+						},
+						{
+							"key": "userEmail",
+							"value": "email@email.com",
+							"type": "text"
+						},
+						{
+							"key": "boardListCreateDtos",
+							"value": "liste1",
+							"type": "text"
+						},
+						{
+							"key": "boardListCreateDtos",
+							"value": "liste2",
+							"type": "text"
+						},
+						{
+							"key": "boardUsersCreateDtos",
+							"value": "eposta@posta.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7206/api/Board/create-board",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Board",
+						"create-board"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listeye yeni card ekleme",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cardName",
+							"value": "yeni card",
+							"type": "text"
+						},
+						{
+							"key": "cardColor",
+							"value": "#000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "açıklama",
+							"type": "text"
+						},
+						{
+							"key": "startDate",
+							"value": "2024-01-20 05:56:02.6078696",
+							"type": "text"
+						},
+						{
+							"key": "finisDate",
+							"value": "2024-01-20 05:56:02.6078696",
+							"type": "text"
+						},
+						{
+							"key": "listTicketCreateDtos",
+							"value": "etiket",
+							"type": "text"
+						},
+						{
+							"key": "listAddition",
+							"type": "file",
+							"src": "/C:/Users/viver/Desktop/nodemcu-reley.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7206/api/TaskListCard/taskcard-create?BoardListId=615835c9-0c5b-4615-9614-3655465be7ec",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"TaskListCard",
+						"taskcard-create"
+					],
+					"query": [
+						{
+							"key": "BoardListId",
+							"value": "615835c9-0c5b-4615-9614-3655465be7ec"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Üye Kayıt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userName",
+							"value": "kullaniciAdi",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "email@emaile.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Admin+123",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/viver/Desktop/ESP8266-Relay-Module-Tutorial-project-web-server-featured.webp"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7206/api/User",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pano Güncelleme",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "boardName",
+							"value": "yeni ad",
+							"type": "text"
+						},
+						{
+							"key": "boardColor",
+							"value": "blue",
+							"type": "text"
+						},
+						{
+							"key": "boardUsersUpdate",
+							"value": "eposta@eposta.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7206/api/Board/update-board?id=8c9ad167-4235-4504-a3d9-a8e6010993fd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Board",
+						"update-board"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8c9ad167-4235-4504-a3d9-a8e6010993fd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Card Güncelleme",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cardName",
+							"value": "isim",
+							"type": "text"
+						},
+						{
+							"key": "cardColor",
+							"value": "blue",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "açıklama",
+							"type": "text"
+						},
+						{
+							"key": "startDate",
+							"value": "2024-01-20 05:56:02.6078696",
+							"type": "text"
+						},
+						{
+							"key": "finisDate",
+							"value": "2024-01-20 05:56:02.6078696",
+							"type": "text"
+						},
+						{
+							"key": "listTicket",
+							"value": "etiket",
+							"type": "text"
+						},
+						{
+							"key": "ListAddition",
+							"type": "file",
+							"src": "/C:/Users/viver/Desktop/ESP8266-Relay-Module-Tutorial-project-web-server-featured.webp"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7206/api/TaskListCard/card-update?id=a87d75ed-c0ec-4f0a-9360-0767119c0e1c",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"TaskListCard",
+						"card-update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "a87d75ed-c0ec-4f0a-9360-0767119c0e1c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pano Silme",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/Board/delete-board?id=8c9ad167-4235-4504-a3d9-a8e6010993fd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Board",
+						"delete-board"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8c9ad167-4235-4504-a3d9-a8e6010993fd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Card Silme",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/TaskListCard/card-delete?id=a87d75ed-c0ec-4f0a-9360-0767119c0e1c",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"TaskListCard",
+						"card-delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "a87d75ed-c0ec-4f0a-9360-0767119c0e1c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Etiket Silme",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7206/api/Ticket/ticket-delete?id=8c9ad167-4235-4504-a3d9-a8e6010993fd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7206",
+					"path": [
+						"api",
+						"Ticket",
+						"ticket-delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8c9ad167-4235-4504-a3d9-a8e6010993fd"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "baseurl",
+			"value": "https://localhost:7206/",
+			"type": "string"
+		}
+	]
+}

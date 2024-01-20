@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/customcss.css">
+    <link rel="stylesheet" href="~/css/ckeditor.css">
+    <title>Ana Sayfa</title>
+</head>
+<body>
+    <div class="pagearea">
+        <div class="fullscreen">
+            <div class="menuarea">
+                <div class="flex-start-start-row nowrap">
+                    <div class="flex-start-start-row nowrap area home">
+                        <a asp-controller="Home" asp-action="Index">
+                            <i class="fa-solid fa-house"></i>
+                            <span>Heytbe</span>
+                        </a>
+                    </div>
+                    <div class="area">
+                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-right-long" id="openmenu"></i>
+                    </div>
+                </div>
+                <div class="fullscreen menuitem">
+                    @await Component.InvokeAsync("UserBoard")
+                </div>
+                <a class="logout" asp-controller="Home" asp-action="SingOut"><i class="fa-solid fa-right-from-bracket"></i>Çıkış</a>
+            </div>
+            @RenderBody()
+        </div>
+        <div class="taskviewcard">
+         @await RenderSectionAsync("modal",required:false);
+        </div>
+        <div class="modal"></div>
+    </div>
+    <script src="~/js/ckeditor.js"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+</body>
+</html>

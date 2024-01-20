@@ -1,0 +1,87 @@
+﻿@model UpdateCardVM
+<main class="mainarea">
+    <div class="taskviewcard" style="display:block;">
+        <div class="content">
+            <form method="post" enctype="multipart/form-data" id="updateCreate" data-id="@Context.Request.Query["itemId"]">
+                <div class="flex-between-start area">
+                    <div class="column70">
+                        <section class="flex-start-start-column title">
+                            <div class="flex-start-start-row">
+                                <i class="fa-solid fa-plus"></i>
+                                <span class="cardtitle">Başlık</span>
+                            </div>
+                            <input type="text" asp-for="update.CardName" placeholder="Başlık" value="@Model.get.data.CardName">
+                        </section>
+                        <section class="fullscreen ticketadd">
+                            <div class="flex-start-start-row title">
+                                <i class="fa-solid fa-ticket"></i>
+                                <span class="tickettitle">Etiketler</span>
+                            </div>
+                            <div class="flex-start-start-row wrap ticketcontent">
+                                <input type="text" class="ticketupdate">
+                                <div class="flex-start-start-row ticketcontentarea">
+                                    @foreach (var item in Model.get.data.ListTickets)
+                                    {
+                                        <span onclick="Delete(this,'/TaskList/TicketDelete?itemid=@item.Id')">@item.Name</span>
+                                    }
+                                </div>
+                            </div>
+                        </section>
+                        <section class="fullscreen description">
+                            <div class="flex-start-start-row title">
+                                <i class="fa-solid fa-message"></i>
+                                <span class="cardtitle">Açıklama</span>
+                            </div>
+                            <textarea asp-for="update.Description" id="" cols="30" rows="10" class="editor">@Model.get.data.Description</textarea>
+                        </section>
+                        <section class="fullscreen addition">
+                            <div class="flex-start-start-row title">
+                                <i class="fa-solid fa-paperclip"></i>
+                                <span class="cardtitle">Eklentiler</span>
+                            </div>
+                            <div class="flex-start-start-column wrap">
+                                @foreach (var item in Model.get.data.ListAdditions)
+                                {
+                                    <div class="flex-start-start-row file" data-id="@item.Id">
+                                        <div class="column30 image">
+                                            <img src="https://localhost:7206/@item.Path" alt="">
+                                        </div>
+                                        <div class="column70 imagedescription">
+                                            <span onclick="Delete(this,'/TaskList/AdditionDelete?itemid=@item.Id')" class="updatadelete delete imagedelete">Sil</span>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="flex-start-start-column wrap add"></div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="column30">
+                        <div class="input">
+                            <label for="add" class="title"><i class="fa-solid fa-paperclip"></i>Eklenti</label>
+                            <input class="none" type="file" id="add" multiple>
+                        </div>
+                        <div class="input">
+                            <span class="title"><i class="fa-solid fa-calendar-days"></i>Tarih</span>
+                            <div class="fullscreen datebox">
+                                <span class="flex-start-start-row start">Başlangıç</span>
+                                <input type="date" asp-for="update.StartDate" value="@Model.get.data.StartDate">
+                                <span class="flex-start-start-row end">Bitiş</span>
+                                <input type="date" asp-for="update.FinisDate" value="@Model.get.data.FinisDate">
+                            </div>
+                        </div>
+                        <div class="input">
+                            <span class="title"><i class="fa-solid fa-fill-drip"></i>Renk</span>
+                            <input type="color" asp-for="update.CardColor" value="@Model.get.data.CardColor">
+                        </div>
+                        <div class="input">
+                            <button type="submit">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    @section modal{
+        <script src="~/js/DeleteAjax.js"></script>
+    }

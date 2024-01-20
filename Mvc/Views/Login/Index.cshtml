@@ -1,0 +1,35 @@
+﻿@model LoginDto
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/customcss.css">
+    <title>Ana Sayfa</title>
+</head>
+<body>
+    <div class="pagearea">
+        <div class="fullscreen singup">
+            <a asp-controller="Singin" asp-action="Index" class="signinbtn">Üye Ol</a>
+            <h1>Karban Board</h1>
+            <section class="flex-start-start-column user-add">
+                <span class="title">Hoş Geldiniz</span>
+                <form action="" method="post" class="flex-start-start-column">
+                    <label for="email">E-Mail Adresiniz</label>
+                    <input type="text" asp-for="Email" placeholder="E-Mail Adres">
+                    <label for="password">Şifre Giriniz</label>
+                    <input type="text" asp-for="Password" placeholder="Şifreniz">
+                    <button type="submit">Giriş Yap</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
